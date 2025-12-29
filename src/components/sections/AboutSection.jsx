@@ -63,35 +63,16 @@ export function AboutSection() {
                         <SectionTitle title="About Me" subtitle="From curious beginner to confident builder." />
                     </div>
 
-                    <div className="space-y-8">
-                        <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                            <span className="w-8 h-[1px] bg-purple-500"></span>
-                            What I Care About
-                        </h3>
-
-                        <div className="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-                            {CARE_ABOUT.map((item, i) => (
-                                <motion.div
-                                    key={item.title}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.15 }}
-                                    className="group"
-                                >
-                                    <p className="text-base md:text-lg">
-                                        <span className="inline-flex items-center gap-2 font-semibold text-slate-900 dark:text-white">
-                                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/50 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 transition-colors">
-                                                <item.icon className="w-4 h-4 text-purple-600 dark:text-purple-400" strokeWidth={2} />
-                                            </span>
-                                            {item.title}:
-                                        </span>
-                                        {" "}{item.description}
-                                    </p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Hi! I'm Raghvendra, a second-year Computer Science student passionate about building fast, scalable web applications. I love turning complex problems into clean, user-friendly solutions. When I'm not coding, you'll find me solving problems on LeetCode or exploring new technologies.
+                        </p>
+                    </motion.div>
                 </div>
             </div>
 
