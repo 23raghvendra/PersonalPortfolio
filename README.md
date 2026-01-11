@@ -1,86 +1,109 @@
-# Raghvendra - Software Engineer Portfolio
+# Raghvendra — Portfolio
 
-This is a modern, high-performance portfolio built with Next.js 16 (App Router), TypeScript, and Tailwind CSS.
-It features a clean, premium design, fully responsive layout, and content management via Markdown files.
+A high-performance, immersive portfolio website built to showcase production-grade full-stack applications and modern web development expertise.
 
-## 🚀 Getting Started
+## 🚀 Overview
 
-1.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+This portfolio is engineered to be more than just a static showcase—it's a demonstration of modern web capabilities. Built with Next.js 16 and React 19, it features fluid animations, dynamic content management, and a premium dark theme aesthetic designed to capture attention immediately.
 
-2.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-
-3.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📁 Project Structure
-
--   `src/app`: Application routes (Pages).
--   `src/components`: Reusable UI components.
--   `src/lib`: Utility functions and data fetchers.
--   `src/content`: Markdown files for Projects and Blog posts.
--   `src/styles`: Global CSS and Tailwind configuration.
--   `public`: Static assets (images).
-
-## 📝 Content Management
-
-### Adding a Project
-Create a new Markdown file in `src/content/projects/`, e.g., `new-project.md`.
-Add the following frontmatter:
-
-```yaml
----
-title: "Project Title"
-description: "Brief description."
-tags: ["React", "Node.js"]
-image: "/images/project-image.jpg"
-demoUrl: "https://demo.com"
-repoUrl: "https://github.com/repo"
-featured: true
-date: "2024-01-01"
----
-
-## Overview
-Project details...
-```
-
-### Adding a Blog Post
-Create a new Markdown file in `src/content/posts/`, e.g., `my-post.md`.
-
-```yaml
----
-title: "Post Title"
-excerpt: "Short summary."
-date: "2024-03-01"
-tags: ["Tech", "Life"]
-coverImage: "/images/blog-cover.jpg"
----
-
-## Content
-Write your post here...
-```
-
-## 🎨 Customizing
-
--   **Colors & Fonts:** Edit `src/styles/globals.css`.
--   **Navigation:** Update `src/components/Header.tsx`.
--   **Home Page Content:** Edit `src/app/(site)/page.tsx`.
--   **About/Skills/Experience data:** Edit the respective page files directly or move to `src/lib/data` if preferred.
+The architecture emphasizes performance (via Server Components and optimized assets) and user experience (particle effects, typewriter animations, and magnetic interactions).
 
 ## 🛠 Tech Stack
 
--   **Framework:** Next.js 16 (App Router)
--   **Styling:** Tailwind CSS v4
--   **Language:** TypeScript
--   **Icons:** Lucide React
--   **Content:** Markdown (Gray-matter, Remark)
--   **Theming:** Next-themes (Dark mode)
+### Core
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS 4, Custom CSS
+- **Animation**: Framer Motion 12
+- **Language**: JavaScript (ES6+)
 
-## 🚢 Deployment
+### Features & Services
+- **Content Management**: Markdown with gray-matter
+- **Theme System**: next-themes (Dark/Light mode)
+- **Icons**: Lucide React
+- **Utilities**: clsx, tailwind-merge
 
-Ready to deploy on [Vercel](https://vercel.com/new).
-Just push to GitHub and import the project in Vercel.
+## ✨ Key Features
+
+**Immersive Animations**: Custom typewriter effects, particle background, and scroll-linked parallax for engaging interactions.
+
+**3D Interactive Cards**: Perspective-tilted project cards with spotlight effects and hover overlays.
+
+**Intelligent Navigation**: Scroll spy sidebar that automatically highlights active sections with smooth transitions.
+
+**Visual Skill System**: Color-coded proficiency indicators with animated progress bars and emoji badges (🔥 Expert, ⭐ Advanced, 🌱 Learning).
+
+**Dynamic Projects**: Markdown-based project management with live demo and GitHub repository links.
+
+**Responsive Design**: Fluid layout that adapts seamlessly from mobile to desktop with touch-optimized interactions.
+
+**Performance Optimized**: Server Components, optimized images, and code-splitting for sub-second load times.
+
+## ⚡️ Getting Started
+
+To run this project locally:
+
+**Clone the repository**
+```bash
+git clone https://github.com/yourusername/portfolio.git
+cd portfolio
+```
+
+**Install dependencies**
+```bash
+npm install
+```
+
+**Run Development Server**
+```bash
+npm run dev
+```
+
+**Build for Production**
+```bash
+npm run build
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (site)/            # Main site routes
+│   └── layout.jsx         # Root layout
+├── components/            # React components
+│   ├── sections/          # Page sections
+│   ├── Hero.jsx
+│   ├── Sidebar.jsx
+│   └── ...
+├── content/projects/      # Markdown project files
+├── lib/                   # Utility functions
+└── styles/                # Global styles & animations
+```
+
+## 🎨 Customization
+
+**Add Projects**: Create markdown files in `src/content/projects/` with frontmatter metadata.
+
+**Update Skills**: Edit `TECH_CATEGORIES` array in `src/components/sections/SkillsSection.jsx`.
+
+**Change Theme**: Modify CSS variables in `src/styles/globals.css` for colors and animations.
+
+## 📫 Contact
+
+- **Email**: your.email@example.com
+- **LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
+- **GitHub**: [github.com/yourusername](https://github.com/yourusername)
+
+Open to **Internship & Full-stack Development Opportunities**.
+
+## 📄 License
+
+MIT License - feel free to use this project as a template for your own portfolio.
+
+---
+
+Built with ❤️ using Next.js, React, and Tailwind CSS

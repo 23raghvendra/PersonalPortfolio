@@ -6,9 +6,46 @@ import { motion } from "framer-motion";
 
 export function ContactForm() {
     const [status, setStatus] = useState("idle");
+    const [errors, setErrors] = useState({});
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = "Name is required";
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email";
+        }
+        if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+        if (!formData.message.trim()) newErrors.message = "Message is required";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+        // Clear error when user starts typing
+        if (errors[id]) {
+            setErrors(prev => ({ ...prev, [id]: null }));
+        }
+    };
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        if (!validateForm()) {
+            // Shake effect logic could go here or be driven by the existence of errors
+            return;
+        }
+
         setStatus("submitting");
 
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -35,7 +72,10 @@ export function ContactForm() {
                     Thanks for reaching out. I'll get back to you soon.
                 </p>
                 <button
-                    onClick={() => setStatus("idle")}
+                    onClick={() => {
+                        setStatus("idle");
+                        setFormData({ name: "", email: "", subject: "", message: "" });
+                    }}
                     className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 hover:underline"
                 >
                     Send another message
@@ -44,8 +84,21 @@ export function ContactForm() {
         );
     }
 
+    const inputClasses = (error) => `
+        w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 
+        border ${error ? 'border-red-500 dark:border-red-500 bg-red-50/50 dark:bg-red-900/10' : 'border-slate-200 dark:border-slate-700/50'} 
+        focus:border-purple-400 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none 
+        transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-slate-100
+    `;
+
+    const errorAnimation = {
+        initial: { opacity: 0, y: -5 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -5 }
+    };
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -54,10 +107,14 @@ export function ContactForm() {
                     <input
                         type="text"
                         id="name"
-                        required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 focus:border-purple-400 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-slate-100"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className={inputClasses(errors.name)}
                         placeholder="Your name"
                     />
+                    {errors.name && (
+                        <motion.p {...errorAnimation} className="text-xs text-red-500 font-medium ml-1">{errors.name}</motion.p>
+                    )}
                 </div>
                 <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -66,10 +123,14 @@ export function ContactForm() {
                     <input
                         type="email"
                         id="email"
-                        required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 focus:border-purple-400 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-slate-100"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={inputClasses(errors.email)}
                         placeholder="you@example.com"
                     />
+                    {errors.email && (
+                        <motion.p {...errorAnimation} className="text-xs text-red-500 font-medium ml-1">{errors.email}</motion.p>
+                    )}
                 </div>
             </div>
 
@@ -80,10 +141,14 @@ export function ContactForm() {
                 <input
                     type="text"
                     id="subject"
-                    required
-                    className="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 focus:border-purple-400 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-slate-100"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className={inputClasses(errors.subject)}
                     placeholder="What's this about?"
                 />
+                {errors.subject && (
+                    <motion.p {...errorAnimation} className="text-xs text-red-500 font-medium ml-1">{errors.subject}</motion.p>
+                )}
             </div>
 
             <div className="space-y-2">
@@ -92,11 +157,15 @@ export function ContactForm() {
                 </label>
                 <textarea
                     id="message"
-                    required
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 focus:border-purple-400 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none transition-all resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-slate-100"
+                    className={`${inputClasses(errors.message)} resize-none`}
                     placeholder="Tell me about your project or opportunity..."
                 ></textarea>
+                {errors.message && (
+                    <motion.p {...errorAnimation} className="text-xs text-red-500 font-medium ml-1">{errors.message}</motion.p>
+                )}
             </div>
 
             <motion.button

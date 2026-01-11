@@ -1,6 +1,7 @@
 import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "../styles/globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
+import ParticleBackground from "../components/ParticleBackground";
 
 const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-display" });
@@ -34,14 +35,15 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${sans.variable} ${outfit.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 selection:bg-indigo-500/30`}
+                className={`${sans.variable} ${outfit.variable} font-sans antialiased text-slate-50 selection:bg-fuchsia-500/30`}
             >
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="dark"
-                    enableSystem
+                    enableSystem={false}
                     disableTransitionOnChange
                 >
+                    <ParticleBackground />
                     {children}
                 </ThemeProvider>
             </body>

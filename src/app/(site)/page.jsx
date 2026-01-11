@@ -15,9 +15,11 @@ export default function Home() {
         <div className="space-y-0 pb-20">
             <Hero />
 
+
             <AboutSection />
 
             <PhilosophySection />
+
 
             <ProjectsSection projects={projects} />
 

@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { SectionTitle } from "@/components/SectionTitle";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
 import { Zap, Heart, Code2, ArrowRight, User } from "lucide-react";
 
@@ -42,6 +43,24 @@ const TIMELINE = [
 ];
 
 export function AboutSection() {
+    const timelineRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: timelineRef,
+        offset: ["start end", "end center"]
+    });
+
+    const floatingAnimation = {
+        animate: {
+            y: [0, -10, 0],
+            rotate: [0, 5, -5, 0],
+            transition: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }
+        }
+    };
+
     return (
         <section id="about" className="container-custom py-24 scroll-mt-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -55,6 +74,9 @@ export function AboutSection() {
                         <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                             <User className="w-24 h-24 text-slate-300 dark:text-slate-600" strokeWidth={1.5} />
                         </div>
+
+                        {/* Floating Icons Removed */}
+
                     </div>
                 </motion.div>
 
@@ -81,7 +103,16 @@ export function AboutSection() {
                     <h3 className="text-2xl font-bold font-display text-slate-900 dark:text-white">My Journey</h3>
                 </div>
 
-                <div className="relative border-l border-slate-200 dark:border-slate-800 ml-3 md:ml-0 space-y-12">
+                <div ref={timelineRef} className="relative ml-3 md:ml-0 space-y-12">
+                    {/* Background Line */}
+                    <div className="absolute left-[-2px] md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 -translate-x-1/2" />
+
+                    {/* Animated Line */}
+                    <motion.div
+                        style={{ scaleY: scrollYProgress }}
+                        className="absolute left-[-2px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 via-pink-500 to-purple-500 origin-top -translate-x-1/2"
+                    />
+
                     {TIMELINE.map((item, i) => (
                         <motion.div
                             key={i}
@@ -103,8 +134,11 @@ export function AboutSection() {
                                     )}
                                 </div>
 
-                                <div className="absolute left-[-5px] md:static md:order-2 flex items-center justify-center">
-                                    <div className="w-3 h-3 rounded-full bg-purple-500 ring-4 ring-white dark:ring-slate-950" />
+                                <div className="absolute left-[-8px] md:static md:order-2 flex items-center justify-center -translate-x-1/2 md:translate-x-0">
+                                    <motion.div
+                                        whileHover={{ scale: 1.5, boxShadow: "0 0 20px rgba(168,85,247,0.5)" }}
+                                        className="w-4 h-4 rounded-full bg-purple-500 ring-4 ring-white dark:ring-slate-950 cursor-pointer relative z-10"
+                                    />
                                 </div>
 
                                 <div className={`md:block ${i % 2 === 0 ? 'order-3' : 'order-1'}`}>

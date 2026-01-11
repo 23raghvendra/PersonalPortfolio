@@ -6,12 +6,11 @@ export default function SiteLayout({ children }) {
     return (
         <div className="flex flex-col min-h-screen relative">
             <ScrollToTop />
-            <div className="fixed inset-0 z-[-1] mesh-gradient pointer-events-none"></div>
 
             <Sidebar />
 
             <div className="flex-1 flex flex-col md:pl-20 transition-all duration-300">
-                <main className="flex-grow pt-20 md:pt-10 px-4 md:px-0">
+                <main className="flex-grow px-4 md:px-0">
                     {children}
                 </main>
                 <Footer />

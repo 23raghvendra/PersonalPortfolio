@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionTitle } from "@/components/SectionTitle";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Code, Zap, Users, Target, Lightbulb, Shield } from "lucide-react";
 
 const PRINCIPLES = [
@@ -37,6 +37,55 @@ const PRINCIPLES = [
     }
 ];
 
+const TiltCard = ({ children, className }) => {
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+
+        const width = rect.width;
+        const height = rect.height;
+
+        const mouseXVal = e.clientX - rect.left;
+        const mouseYVal = e.clientY - rect.top;
+
+        const xPct = mouseXVal / width - 0.5;
+        const yPct = mouseYVal / height - 0.5;
+
+        x.set(xPct);
+        y.set(yPct);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    return (
+        <motion.div
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d"
+            }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={className}
+        >
+            <div style={{ transform: "translateZ(20px)" }}>
+                {children}
+            </div>
+        </motion.div>
+    );
+};
+
 export function PhilosophySection() {
     return (
         <section id="philosophy" className="container-custom py-24 scroll-mt-20 relative">
@@ -48,7 +97,7 @@ export function PhilosophySection() {
                     subtitle="These are the principles I'm actively learning to apply as I grow as an engineer."
                 />
 
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 perspective-1000">
                     {PRINCIPLES.map((principle, i) => (
                         <motion.div
                             key={principle.title}
@@ -56,20 +105,23 @@ export function PhilosophySection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="group relative p-8 rounded-2xl bg-white/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 hover:border-purple-500/30 dark:hover:border-purple-500/30 transition-all duration-300"
                         >
-                            <div className="mb-4 inline-flex p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/50 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                                <principle.icon className="w-6 h-6 text-purple-600 dark:text-purple-400" strokeWidth={2} />
-                            </div>
+                            <TiltCard
+                                className="group relative h-full p-8 rounded-2xl bg-white/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 dark:hover:border-purple-500/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-purple-500/10"
+                            >
+                                <div className="mb-4 inline-flex p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/50 group-hover:scale-110 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-all duration-300">
+                                    <principle.icon className="w-6 h-6 text-purple-600 dark:text-purple-400 group-hover:animate-pulse" strokeWidth={2} />
+                                </div>
 
-                            <h3 className="text-xl font-bold font-display text-slate-900 dark:text-slate-100 mb-2">
-                                {principle.title}
-                            </h3>
-                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                                {principle.description}
-                            </p>
+                                <h3 className="text-xl font-bold font-display text-slate-900 dark:text-slate-100 mb-2">
+                                    {principle.title}
+                                </h3>
+                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    {principle.description}
+                                </p>
 
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/0 to-fuchsia-500/0 group-hover:from-purple-500/5 group-hover:to-fuchsia-500/5 transition-all duration-300 pointer-events-none" />
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/0 to-fuchsia-500/0 group-hover:from-purple-500/5 group-hover:to-fuchsia-500/5 transition-all duration-300 pointer-events-none" />
+                            </TiltCard>
                         </motion.div>
                     ))}
                 </div>

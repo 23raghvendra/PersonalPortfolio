@@ -1,10 +1,9 @@
+"use client";
+
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionTitle } from "@/components/SectionTitle";
 
 export function ProjectsSection({ projects }) {
-    
-    
-
     return (
         <section id="projects" className="container-custom py-20 scroll-mt-20">
             <SectionTitle
