@@ -1,4 +1,4 @@
-import { Footer } from "@/components/Footer";
+
 import { Sidebar } from "@/components/Sidebar";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
@@ -13,7 +13,7 @@ export default function SiteLayout({ children }) {
                 <main className="flex-grow px-4 md:px-0">
                     {children}
                 </main>
-                <Footer />
+
             </div>
         </div>
     );

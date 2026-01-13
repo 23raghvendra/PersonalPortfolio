@@ -94,9 +94,9 @@ src/
 
 ## 📫 Contact
 
-- **Email**: your.email@example.com
-- **LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
-- **GitHub**: [github.com/yourusername](https://github.com/yourusername)
+- **Email**: 2006raghvendrasingh@gmail.com
+- **LinkedIn**: www.linkedin.com/in/raghvendra-singh-8b0745316
+- **GitHub**: https://github.com/23raghvendra
 
 Open to **Internship & Full-stack Development Opportunities**.
 
@@ -105,5 +105,3 @@ Open to **Internship & Full-stack Development Opportunities**.
 MIT License - feel free to use this project as a template for your own portfolio.
 
 ---
-
-Built with ❤️ using Next.js, React, and Tailwind CSS
