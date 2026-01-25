@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import {
     Home, User, Zap, Briefcase, Mail, Lightbulb
 } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
+
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -171,9 +171,7 @@ export function Sidebar() {
 
             <div className="px-3 pt-6 overflow-hidden min-w-max mt-4">
                 <div className="flex items-center gap-4 px-2">
-                    <div className="shrink-0">
-                        <ThemeToggle />
-                    </div>
+
                     <motion.div
                         className="flex flex-col"
                         animate={{ opacity: isHovered ? 1 : 0 }}
