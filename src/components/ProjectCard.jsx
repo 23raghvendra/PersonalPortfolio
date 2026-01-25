@@ -65,18 +65,7 @@ export function ProjectCard({ project }) {
                         {project.description}
                     </p>
 
-                    <div className="mt-auto flex flex-wrap gap-2">
-                        {project.tags.slice(0, 4).map(tag => (
-                            <span key={tag} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-full border border-slate-200 dark:border-slate-700/50">
-                                {tag}
-                            </span>
-                        ))}
-                        {project.tags.length > 4 && (
-                            <span className="px-3 py-1 bg-slate-50 dark:bg-slate-900 text-slate-500 text-xs font-medium rounded-full border border-slate-200 dark:border-slate-700">
-                                +{project.tags.length - 4}
-                            </span>
-                        )}
-                    </div>
+
                 </div>
             </SpotlightCard>
         </motion.div>

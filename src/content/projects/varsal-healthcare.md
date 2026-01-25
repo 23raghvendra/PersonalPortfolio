@@ -6,7 +6,7 @@ image: "/images/varsal-healthcare.png"
 demoUrl: "https://varsalhealthcare.in/"
 repoUrl: "https://github.com/23raghvendra/VARSALHEALTHCARE_PVT"
 featured: true
-date: "2024-12-20"
+date: "2026-01-26"
 ---
 
 ## Overview
